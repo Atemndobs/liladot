@@ -1,0 +1,17 @@
+# Task ID: 2
+# Title: Set up package.json
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Initialize package.json with project metadata and scripts
+# Details:
+- Run npm init -y
+- Update package.json with project details
+- Add essential scripts (dev, build, test, etc.)
+
+# Test Strategy:
+- Verify package.json exists in project root
+- Check for required fields (name, version, description, main, scripts)
+- Verify essential scripts are defined (dev, build, test, lint)
+- Run `npm test` to ensure test script works
+- Run `npm run lint` to verify linting setup

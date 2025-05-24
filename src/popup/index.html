@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LilaDot - Meeting Recorder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>LilaDot</h1>
+      <div id="status" class="status">
+        <span class="status-dot"></span>
+        <span id="status-text">Ready</span>
+      </div>
+    </header>
+
+    <main>
+      <div id="meeting-info" class="meeting-info hidden">
+        <h2>Meeting Detected</h2>
+        <div class="meeting-details">
+          <div class="detail">
+            <span class="label">Platform:</span>
+            <span id="meeting-platform">-</span>
+          </div>
+          <div class="detail">
+            <span class="label">Duration:</span>
+            <span id="meeting-duration">00:00:00</span>
+          </div>
+          <div class="detail">
+            <span class="label">Participants:</span>
+            <span id="participant-count">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="record-btn" class="btn btn-primary" disabled>
+          <span class="btn-icon">🎙️</span>
+          <span class="btn-text">Start Recording</span>
+        </button>
+        <button id="stop-btn" class="btn btn-secondary" disabled>
+          <span class="btn-icon">⏹️</span>
+          <span class="btn-text">Stop</span>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <div class="settings-toggle">
+        <button id="settings-btn" class="btn-icon" title="Settings">⚙️</button>
+      </div>
+      <div class="version">v0.1.0</div>
+    </footer>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

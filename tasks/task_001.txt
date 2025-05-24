@@ -1,0 +1,18 @@
+# Task ID: 1
+# Title: Initialize Git repository
+# Status: in-progress
+# Dependencies: None
+# Priority: high
+# Description: Set up Git repository with proper .gitignore, README, and license
+# Details:
+- Initialize Git repository
+- Add .gitignore file
+- Create README.md with project overview
+- Add MIT license
+
+# Test Strategy:
+- Run `git status` to verify clean working directory
+- Verify .gitignore file exists and contains essential patterns
+- Check README.md exists and contains project overview
+- Confirm MIT LICENSE file exists with correct content
+- Verify initial commit is created with all starter files

@@ -1,0 +1,14 @@
+# Task ID: 5
+# Title: Create directory structure
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Set up the basic project directory structure
+# Details:
+- Create src/ directory
+- Set up public/ for static assets
+- Create components/ directory
+- Set up tests/ directory
+
+# Test Strategy:
+
