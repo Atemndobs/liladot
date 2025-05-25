@@ -47,18 +47,23 @@ export function getInitials(name: string): string {
     .substring(0, 2);
 }
 
-export function debounce<T extends (...args: any[]) => any>(
-  func: T,
+type AnyFunction<Args extends unknown[] = unknown[], Return = unknown> = (...args: Args) => Return;
+
+export function debounce<F extends AnyFunction>(
+  func: F,
   wait: number
-): (...args: Parameters<T>) => void {
-  let timeout: ReturnType<typeof setTimeout>;
-  return function executedFunction(...args: Parameters<T>) {
-    const later = () => {
+): (this: ThisParameterType<F>, ...args: Parameters<F>) => void {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  return function (this: ThisParameterType<F>, ...args: Parameters<F>) {
+    if (timeout !== null) {
       clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
+    }
+
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+      timeout = null;
+    }, wait);
   };
 }
 
@@ -72,11 +77,14 @@ export function getErrorMessage(error: unknown): string {
   return 'An unknown error occurred';
 }
 
-export function parseJSON<T>(value: string | null): T | undefined {
+export function parseJSON<T = unknown>(value: string | null): T | undefined {
+  if (value === null || value === 'undefined') {
+    return undefined;
+  }
   try {
-    return value === 'undefined' ? undefined : JSON.parse(value ?? '');
-  } catch {
-    console.error('parsing error on', { value });
+    return JSON.parse(value) as T;
+  } catch (error) {
+    console.error('Parsing error:', { value, error });
     return undefined;
   }
 }
@@ -90,14 +98,14 @@ export function getBaseUrl() {
 export function formatPhoneNumber(phoneNumber: string): string {
   // Remove all non-digit characters
   const cleaned = ('' + phoneNumber).replace(/\D/g, '');
-  
+
   // Check if the number is valid
   const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-  
+
   if (match) {
     return `(${match[1]}) ${match[2]}-${match[3]}`;
   }
-  
+
   return phoneNumber; // Return original if format doesn't match
 }
 
@@ -107,34 +115,32 @@ export function generateGradientFromString(str: string): string {
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
-  
+
   // Generate a color from the hash
   const hue = Math.abs(hash % 360);
   const saturation = 70 + (Math.abs(hash) % 15); // 70-85%
   const lightness = 50 + (Math.abs(hash) % 15); // 50-65%
-  
+
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
 export function isMobile(): boolean {
   if (!isBrowser()) return false;
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  );
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 export function copyToClipboard(text: string): Promise<void> {
   if (navigator.clipboard) {
     return navigator.clipboard.writeText(text);
   }
-  
+
   // Fallback for older browsers
   const textarea = document.createElement('textarea');
   textarea.value = text;
   textarea.style.position = 'fixed';
   document.body.appendChild(textarea);
   textarea.select();
-  
+
   try {
     document.execCommand('copy');
     return Promise.resolve();

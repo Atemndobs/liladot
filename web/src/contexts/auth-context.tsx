@@ -3,22 +3,28 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 import { supabase } from '@/lib/supabase';
 
-interface AuthResponse {
-  data: {
-    user: User | null;
-    session: Session | null;
-  } | null;
-  user: User | null;
-  session: Session | null;
-  error: AuthError | null;
-}
-
 type AuthContextType = {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<AuthResponse>;
-  signUp: (email: string, password: string) => Promise<AuthResponse>;
+  signIn: (
+    email: string,
+    password: string
+  ) => Promise<{
+    data: { user: User | null; session: Session | null };
+    user: User | null;
+    session: Session | null;
+    error: AuthError | null;
+  }>;
+  signUp: (
+    email: string,
+    password: string
+  ) => Promise<{
+    data: { user: User | null; session: Session | null };
+    user: User | null;
+    session: Session | null;
+    error: AuthError | null;
+  }>;
   signOut: () => Promise<{ error: Error | null }>;
   resetPassword: (email: string) => Promise<{ error: Error | null }>;
 };
@@ -54,66 +60,76 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const signIn = async (email: string, password: string): Promise<AuthResponse> => {
+  const signIn = async (email: string, password: string) => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
+      const response = {
+        data: {
+          user: data?.user ?? null,
+          session: data?.session ?? null,
+        },
+        user: data?.user ?? null,
+        session: data?.session ?? null,
+        error: error,
+      };
+
       if (error) {
-        return { data: null, user: null, session: null, error };
+        return response;
       }
 
-      const user = data?.user ?? null;
-      const session = data?.session ?? null;
+      setUser(data?.user ?? null);
+      setSession(data?.session ?? null);
 
-      return {
-        data: { user, session },
-        user,
-        session,
-        error: null,
-      };
+      return response;
     } catch (error) {
-      const authError = error as AuthError;
+      console.error('Error signing in:', error);
       return {
-        data: null,
+        data: { user: null, session: null },
         user: null,
         session: null,
-        error: authError,
+        error: error as AuthError,
       };
     } finally {
       setLoading(false);
     }
   };
 
-  const signUp = async (email: string, password: string): Promise<AuthResponse> => {
+  const signUp = async (email: string, password: string) => {
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
 
+      const response = {
+        data: {
+          user: data?.user ?? null,
+          session: data?.session ?? null,
+        },
+        user: data?.user ?? null,
+        session: data?.session ?? null,
+        error: error,
+      };
+
       if (error) {
-        return { data: null, user: null, session: null, error };
+        return response;
       }
 
-      const user = data?.user ?? null;
-      const session = data?.session ?? null;
+      setUser(data?.user ?? null);
+      setSession(data?.session ?? null);
 
-      return {
-        data: { user, session },
-        user,
-        session,
-        error: null,
-      };
+      return response;
     } catch (error) {
-      const authError = error as AuthError;
+      console.error('Error signing up:', error);
       return {
-        data: null,
+        data: { user: null, session: null },
         user: null,
         session: null,
-        error: authError,
+        error: error as AuthError,
       };
     } finally {
       setLoading(false);
@@ -128,7 +144,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { error: error ? new Error(error.message) : null };
     } catch (error) {
       console.error('Error signing out:', error);
-      return { error: error as Error };
+      return { error: error instanceof Error ? error : new Error('Failed to sign out') };
     }
   };
 
@@ -138,7 +154,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { error: error ? new Error(error.message) : null };
     } catch (error) {
       console.error('Error resetting password:', error);
-      return { error: error as Error };
+      return { error: error instanceof Error ? error : new Error('Failed to reset password') };
     }
   };
 

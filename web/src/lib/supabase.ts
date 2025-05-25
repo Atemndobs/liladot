@@ -1,24 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
-// These environment variables will be injected by Vite
-interface ImportMetaEnv {
-  VITE_SUPABASE_URL: string;
-  VITE_SUPABASE_ANON_KEY: string;
-}
-
-declare global {
-  interface ImportMeta {
-    readonly env: ImportMetaEnv;
-  }
-}
-
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    'Missing Supabase environment variables. Please check your .env file.'
-  );
+  throw new Error('Missing Supabase environment variables. Please check your .env file.');
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
@@ -33,11 +19,11 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 export * from '@supabase/supabase-js';
 
 // Helper function to handle errors
-export const handleSupabaseError = (error: any, context: string) => {
+export const handleSupabaseError = (error: unknown, context: string) => {
   console.error(`Supabase error in ${context}:`, error);
-  throw new Error(
-    error.message || `An error occurred while ${context.toLowerCase()}`
-  );
+  const errorMessage =
+    error instanceof Error ? error.message : `An error occurred while ${context.toLowerCase()}`;
+  throw new Error(errorMessage);
 };
 
 // Helper to format file size
@@ -50,7 +36,11 @@ export const formatFileSize = (bytes: number): string => {
 };
 
 // Helper to generate a unique file path
-export const generateFilePath = (userId: string, fileName: string, folder = 'recordings'): string => {
+export const generateFilePath = (
+  userId: string,
+  fileName: string,
+  folder = 'recordings'
+): string => {
   const timestamp = Date.now();
   const randomString = Math.random().toString(36).substring(2, 8);
   const fileExt = fileName.split('.').pop();
@@ -70,13 +60,11 @@ export const storage = {
       upsert?: boolean;
     }
   ) {
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload(path, file, {
-        cacheControl: options?.cacheControl || '3600',
-        contentType: options?.contentType || file.type,
-        upsert: options?.upsert || false,
-      });
+    const { data, error } = await supabase.storage.from(bucket).upload(path, file, {
+      cacheControl: options?.cacheControl || '3600',
+      contentType: options?.contentType || file.type,
+      upsert: options?.upsert || false,
+    });
 
     if (error) {
       handleSupabaseError(error, 'uploading file');
@@ -93,9 +81,7 @@ export const storage = {
 
   // Download a file from storage
   async downloadFile(bucket: string, path: string) {
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .download(path);
+    const { data, error } = await supabase.storage.from(bucket).download(path);
     if (error) {
       handleSupabaseError(error, 'downloading file');
     }
@@ -125,11 +111,7 @@ export const db = {
 
   // Find a single record by ID
   async findById<T>(table: string, id: string) {
-    const { data, error } = await supabase
-      .from(table)
-      .select('*')
-      .eq('id', id)
-      .single();
+    const { data, error } = await supabase.from(table).select('*').eq('id', id).single();
 
     if (error) {
       if (error.code === 'PGRST116') {
@@ -143,11 +125,7 @@ export const db = {
 
   // Insert a new record
   async insert<T>(table: string, record: Omit<T, 'id' | 'created_at' | 'updated_at'>) {
-    const { data, error } = await supabase
-      .from(table)
-      .insert(record)
-      .select()
-      .single();
+    const { data, error } = await supabase.from(table).insert(record).select().single();
 
     if (error) {
       handleSupabaseError(error, `inserting into ${table}`);
