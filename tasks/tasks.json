@@ -1,161 +1,307 @@
 {
   "tasks": [
-    /* Project Initialization */
     {
       "id": 1,
-      "title": "Initialize Git repository",
-      "description": "Set up Git repository with proper .gitignore, README, and license",
+      "title": "Implement Supabase storage for recordings and transcripts",
+      "description": "Set up Supabase integration to store meeting recordings and transcripts",
+      "details": "- Set up Supabase project and database\n- Create tables for recordings and transcripts\n- Implement file upload functionality for recordings\n- Store transcript data with proper relationships\n- Add error handling and retry logic\n- Implement progress tracking for uploads\n- Add storage cleanup for old recordings",
+      "testStrategy": "- Test file uploads of different sizes\n- Verify transcript data is stored correctly\n- Test retrieval of recordings and transcripts\n- Verify error handling for failed uploads\n- Test storage cleanup functionality",
       "status": "pending",
       "dependencies": [],
       "priority": "high",
-      "details": "- Initialize Git repository\n- Add .gitignore file\n- Create README.md with project overview\n- Add MIT license",
-      "testStrategy": "- Run `git status` to verify clean working directory\n- Verify .gitignore file exists and contains essential patterns\n- Check README.md exists and contains project overview\n- Confirm MIT LICENSE file exists with correct content\n- Verify initial commit is created with all starter files"
+      "subtasks": []
     },
     {
       "id": 2,
-      "title": "Set up package.json",
-      "description": "Initialize package.json with project metadata and scripts",
+      "title": "Create Supabase client utilities",
+      "description": "Implement utility functions for interacting with Supabase storage and database",
+      "details": "- Create supabase client configuration\n- Implement file upload/download functions\n- Create CRUD operations for transcripts\n- Add type definitions for Supabase tables\n- Implement authentication with Supabase\n- Add error handling and logging\n- Create utility functions for common operations",
+      "testStrategy": "- Test file upload and download\n- Verify CRUD operations work correctly\n- Test error scenarios\n- Verify type safety\n- Test authentication flow",
       "status": "pending",
-      "dependencies": [1],
+      "dependencies": [
+        1
+      ],
       "priority": "high",
-      "details": "- Run npm init -y\n- Update package.json with project details\n- Add essential scripts (dev, build, test, etc.)",
-      "testStrategy": "- Verify package.json exists in project root\n- Check for required fields (name, version, description, main, scripts)\n- Verify essential scripts are defined (dev, build, test, lint)\n- Run `npm test` to ensure test script works\n- Run `npm run lint` to verify linting setup"
+      "subtasks": []
     },
     {
       "id": 3,
-      "title": "Configure TypeScript",
-      "description": "Set up TypeScript configuration for the project",
+      "title": "Update background script for Supabase storage",
+      "description": "Modify the background script to handle Supabase storage operations",
+      "details": "- Update message handlers for storage operations\n- Implement file chunking for large recordings\n- Add progress tracking for uploads/downloads\n- Handle offline scenarios with queueing\n- Implement retry logic for failed operations\n- Add storage quota management\n- Update state management for cloud storage",
+      "testStrategy": "- Test uploading recordings of various sizes\n- Verify progress tracking works correctly\n- Test offline behavior and sync\n- Verify retry logic for failed uploads\n- Test storage quota enforcement",
       "status": "pending",
-      "dependencies": [2],
+      "dependencies": [
+        2
+      ],
       "priority": "high",
-      "details": "- Install TypeScript as dev dependency\n- Create tsconfig.json\n- Configure compiler options\n- Set up type definitions",
-      "testStrategy": "- Verify tsconfig.json exists with correct configuration\n- Create a test TypeScript file with type definitions\n- Run `tsc --noEmit` to check for compilation errors\n- Verify type checking works with `tsc --pretty --noEmit`\n- Test with strict mode enabled"
+      "subtasks": []
     },
     {
       "id": 4,
-      "title": "Set up ESLint and Prettier",
-      "description": "Configure code linting and formatting",
+      "title": "Update UI for cloud storage management",
+      "description": "Enhance the UI to manage recordings stored in Supabase",
+      "details": "- Create a recordings library view\n- Add download/delete functionality\n- Show storage usage\n- Implement search and filter for recordings\n- Add loading states for cloud operations\n- Show upload/download progress\n- Add offline mode indicators",
+      "testStrategy": "- Test recording list loading and display\n- Verify download/delete functionality\n- Test search and filter features\n- Verify progress indicators work correctly\n- Test offline mode behavior",
       "status": "pending",
-      "dependencies": [2],
-      "priority": "high",
-      "details": "- Install ESLint and Prettier\n- Configure .eslintrc and .prettierrc\n- Add lint scripts to package.json\n- Set up pre-commit hooks",
-      "testStrategy": "- Run `npm run lint` to verify no linting errors\n- Check that Prettier formatting is enforced\n- Verify pre-commit hooks run linting\n- Test with intentional formatting errors to see if they're caught\n- Verify editor integration shows linting feedback"
+      "dependencies": [
+        3
+      ],
+      "priority": "medium",
+      "subtasks": []
     },
     {
       "id": 5,
-      "title": "Create directory structure",
-      "description": "Set up the basic project directory structure",
+      "title": "Create Dashboard Web Application",
+      "description": "Build a web-based dashboard for managing recordings and settings",
+      "details": "- Set up a React-based dashboard application in the same repository\n- Configure Vite + React + TypeScript setup\n- Implement routing for different sections\n- Create a responsive layout with sidebar navigation\n- Add authentication with Supabase\n- Design the main dashboard view\n- Implement settings page\n- Add recording management interface\n- Create transcript viewing and management\n- Set up shared types and utilities with the extension",
+      "testStrategy": "- Test responsive layout on different screen sizes\n- Verify all navigation links work\n- Test authentication flow\n- Verify data loading and display\n- Test all interactive components\n- Verify shared code works between extension and dashboard",
       "status": "pending",
-      "dependencies": [1],
+      "dependencies": [2],
       "priority": "high",
-      "details": "- Create src/ directory\n- Set up public/ for static assets\n- Create components/ directory\n- Set up tests/ directory",
-      "testStrategy": "- Verify existence of src/, public/, components/, and tests/ directories\n- Check directory permissions are set correctly\n- Verify .gitkeep files in empty directories if needed\n- Test path resolution for imports from these directories\n- Verify build process can access these directories"
+      "subtasks": [
+        {
+          "id": "5.1",
+          "title": "Set up web app structure",
+          "description": "Configure Vite + React + TypeScript for the dashboard",
+          "details": "- Create /web directory structure\n- Set up Vite configuration\n- Configure TypeScript\n- Add necessary dependencies\n- Set up build scripts",
+          "status": "pending"
+        },
+        {
+          "id": "5.2",
+          "title": "Implement authentication flow",
+          "description": "Set up Supabase auth for the web dashboard",
+          "details": "- Implement login/signup pages\n- Handle auth state\n- Set up protected routes\n- Add auth providers (Google, GitHub, etc.)\n- Handle session management",
+          "status": "pending"
+        },
+        {
+          "id": "5.3",
+          "title": "Create dashboard layout and navigation",
+          "description": "Build the main layout with responsive sidebar",
+          "details": "- Create responsive sidebar\n- Implement navigation menu\n- Add theme support\n- Create header with user menu\n- Add mobile responsiveness",
+          "status": "pending"
+        },
+        {
+          "id": "5.4",
+          "title": "Implement recordings list view",
+          "description": "Create a view to list all user recordings",
+          "details": "- Fetch and display recordings\n- Add search and filter functionality\n- Implement pagination\n- Add sorting options\n- Create loading and empty states",
+          "status": "pending"
+        },
+        {
+          "id": "5.5",
+          "title": "Create recording detail view",
+          "description": "Build a detailed view for individual recordings",
+          "details": "- Display recording metadata\n- Add media player for audio\n- Show transcript\n- Add download/delete actions\n- Implement sharing functionality",
+          "status": "pending"
+        }
+      ]
     },
-    
-    /* Development Environment */
     {
       "id": 6,
-      "title": "Set up Vite",
-      "description": "Configure Vite for development and building",
+      "title": "Integrate Dashboard with Extension",
+      "description": "Connect the extension popup with the dashboard web app",
+      "details": "- Add dashboard button to extension popup\n- Implement secure communication between extension and dashboard\n- Handle authentication state between extension and dashboard\n- Add deep linking to specific recordings/transcripts\n- Implement message passing for real-time updates\n- Add error handling for connection issues\n- Ensure secure data transfer",
+      "testStrategy": "- Test opening dashboard from extension\n- Verify authentication state is maintained\n- Test deep linking to specific content\n- Verify real-time updates work\n- Test error scenarios and recovery",
       "status": "pending",
-      "dependencies": [2, 5],
+      "dependencies": [
+        5
+      ],
       "priority": "high",
-      "details": "- Install Vite and required plugins\n- Configure vite.config.ts\n- Set up development server\n- Configure production build",
-      "testStrategy": "- Run `npm run dev` and verify development server starts\n- Access the dev server in browser and check for errors\n- Verify HMR (Hot Module Replacement) works\n- Test production build with `npm run build`\n- Verify build output is generated in correct directory\n- Run build output verification tests"
+      "subtasks": []
     },
     {
       "id": 7,
-      "title": "Configure environment variables",
-      "description": "Set up environment configuration",
+      "title": "Implement AI Summarization Feature",
+      "description": "Add AI-powered summarization for transcripts",
+      "details": "- Integrate with an AI/ML service (e.g., OpenAI, Anthropic)\n- Create summarization API endpoints\n- Implement different summarization styles (concise, detailed, action items, etc.)\n- Add UI controls for summarization\n- Cache summarization results\n- Handle long transcripts with chunking\n- Add error handling and retry logic",
+      "testStrategy": "- Test summarization with different transcript lengths\n- Verify different summarization styles\n- Test error handling for API failures\n- Verify caching works correctly\n- Test performance with large transcripts",
       "status": "pending",
-      "dependencies": [6],
+      "dependencies": [
+        5
+      ],
       "priority": "medium",
-      "details": "- Create .env.example\n- Set up dotenv\n- Configure environment variables for different environments",
-      "testStrategy": "- Create .env.example with required variables\n- Verify .env is in .gitignore\n- Test environment variable loading in development\n- Verify production environment variables work\n- Test with missing variables to ensure proper error handling\n- Verify sensitive data is not exposed in client bundle"
+      "subtasks": []
     },
-    {
-      "id": 8,
-      "title": "Set up testing framework",
-      "description": "Configure Jest and Testing Library",
-      "status": "pending",
-      "dependencies": [2, 5],
-      "priority": "high",
-      "details": "- Install Jest and Testing Library\n- Configure jest.config.js\n- Set up test utilities\n- Add test scripts",
-      "testStrategy": "- Create a basic test file that imports and renders a component\n- Run `npm test` and verify tests execute\n- Test watch mode with `npm test -- --watch`\n- Verify test coverage reporting works\n- Test mocking capabilities\n- Verify React Testing Library renders components correctly"
-    },
-    
-    /* Core Extension Setup */
     {
       "id": 9,
-      "title": "Create manifest.json",
-      "description": "Set up Chrome Extension manifest",
+      "title": "Implement Customizable Recording Settings",
+      "description": "Add UI and functionality for customizing recording quality and format",
+      "details": "- Create settings panel for recording options\n- Add quality presets (low, medium, high)\n- Implement bitrate and format selection\n- Add preview functionality\n- Save settings to user preferences\n- Add tooltips and help text\n- Implement validation for settings",
+      "testStrategy": "- Test different quality settings\n- Verify settings persistence\n- Test with different network conditions\n- Verify error handling for invalid settings\n- Test on different devices",
       "status": "pending",
-      "dependencies": [5],
-      "priority": "high",
-      "details": "- Create manifest.json\n- Configure extension metadata\n- Set up permissions\n- Configure content security policy",
-      "testStrategy": "- Validate manifest.json against Chrome Extension Manifest V3 schema\n- Test loading unpacked extension in Chrome\n- Verify required permissions are correctly set\n- Test extension installation and update flows\n- Verify content security policy is properly configured\n- Test extension in Chrome's incognito mode"
+      "dependencies": [
+        8
+      ],
+      "priority": "medium",
+      "subtasks": []
     },
     {
       "id": 10,
-      "title": "Set up background service worker",
-      "description": "Configure background service worker for extension",
+      "title": "Add Export Options for Transcripts",
+      "description": "Implement functionality to export transcripts in multiple formats",
+      "details": "- Add export menu to transcript view\n- Support formats: TXT, PDF, DOCX, SRT\n- Implement formatting options\n- Add timestamp inclusion toggle\n- Add speaker labels option\n- Implement batch export\n- Add progress indicators\n- Add success/error notifications",
+      "testStrategy": "- Test export in all formats\n- Verify formatting is correct\n- Test with different transcript lengths\n- Verify timestamps and speaker labels\n- Test batch export functionality\n- Verify error handling",
       "status": "pending",
-      "dependencies": [9],
-      "priority": "high",
-      "details": "- Create background script\n- Set up message passing\n- Implement event listeners\n- Configure storage",
-      "testStrategy": "- Verify service worker registers in Chrome's extension management\n- Test service worker lifecycle events (install, activate, fetch)\n- Verify message passing between service worker and content scripts\n- Test service worker error handling and recovery\n- Verify offline functionality\n- Test service worker updates and version management"
+      "dependencies": [
+        8
+      ],
+      "priority": "medium",
+      "subtasks": []
     },
     {
       "id": 11,
-      "title": "Configure content scripts",
-      "description": "Set up content scripts for meeting detection",
+      "title": "Integrate Calendar Services",
+      "description": "Add support for syncing with popular calendar services",
+      "details": "- Add calendar service selection (Google, Outlook, etc.)\n- Implement OAuth2 authentication flow\n- Create event sync functionality\n- Add meeting detection from calendar\n- Implement automatic recording scheduling\n- Add calendar view in dashboard\n- Handle recurring events\n- Add notification settings",
+      "testStrategy": "- Test OAuth flow for each service\n- Verify event syncing works correctly\n- Test meeting detection from calendar\n- Verify recording scheduling\n- Test notification system\n- Verify handling of time zones\n- Test with recurring events",
       "status": "pending",
-      "dependencies": [9],
-      "priority": "high",
-      "details": "- Create content script files\n- Configure content script injection\n- Set up message passing to background\n- Implement meeting detection logic",
-      "testStrategy": "- Verify content scripts inject into target pages\n- Test message passing between content scripts and background\n- Verify CSS styles are applied correctly\n- Test content script isolation\n- Verify content scripts work after page navigation\n- Test with various content security policies"
+      "dependencies": [
+        8
+      ],
+      "priority": "medium",
+      "subtasks": []
     },
     {
       "id": 12,
-      "title": "Set up state management",
-      "description": "Configure Zustand for state management",
+      "title": "Implement Team Collaboration Features",
+      "description": "Add functionality for teams to collaborate on recordings and transcripts",
+      "details": "- Create team management interface\n- Implement role-based access control\n- Add sharing functionality for recordings\n- Create collaborative editing for transcripts\n- Add comments and annotations\n- Implement activity feed\n- Add notification system\n- Create team analytics dashboard",
+      "testStrategy": "- Test team creation and management\n- Verify role-based permissions\n- Test sharing functionality\n- Verify collaborative editing\n- Test notification system\n- Verify activity feed updates\n- Test analytics dashboard",
       "status": "pending",
-      "dependencies": [6],
+      "dependencies": [
+        8
+      ],
       "priority": "medium",
-      "details": "- Install Zustand\n- Create store configuration\n- Set up persisted state\n- Create store hooks",
-      "testStrategy": "- Create unit tests for state management logic\n- Verify state persistence across page reloads\n- Test state updates and subscriptions\n- Verify middleware integration (e.g., persistence, logging)\n- Test state hydration from storage\n- Verify state serialization/deserialization"
+      "subtasks": []
     },
-    
-    /* Build System */
     {
       "id": 13,
-      "title": "Configure production build",
-      "description": "Set up production build process",
+      "title": "Update Theme System",
+      "description": "Implement light and dark themes with correct color scheme",
+      "details": "- Create light theme with light gray background\n- Create dark theme with glassy black background\n- Update purple accent color for buttons and logo\n- Add theme toggle functionality\n- Save theme preference\n- Update all UI components to use theme variables\n- Ensure proper contrast and accessibility",
+      "testStrategy": "- Test theme switching\n- Verify color contrast meets accessibility standards\n- Test theme persistence\n- Check all UI elements in both themes\n- Test on different devices and screen sizes",
       "status": "pending",
-      "dependencies": [6],
+      "dependencies": [],
       "priority": "high",
-      "details": "- Configure Vite for production\n- Set up asset optimization\n- Configure source maps\n- Create build scripts",
-      "testStrategy": "- Run production build and verify completion without errors\n- Verify build output is minified and optimized\n- Test source maps generation and functionality\n- Verify asset hashing for cache busting\n- Test build output size and optimization\n- Verify environment-specific builds work correctly"
+      "subtasks": []
     },
     {
       "id": 14,
-      "title": "Set up versioning",
-      "description": "Configure version management",
+      "title": "Convert Record/Stop to Single Toggle Button",
+      "description": "Update the UI to use a single button that toggles between record and stop states",
+      "details": "- Update the popup HTML to have a single record/stop button\n- Modify the TypeScript to handle the toggle functionality\n- Update the button styling to change appearance based on state\n- Ensure proper state management between record and stop modes",
+      "testStrategy": "- Test toggling between record and stop states\n- Verify button appearance changes correctly\n- Ensure recording starts and stops as expected\n- Check for any state management issues",
       "status": "pending",
-      "dependencies": [2, 13],
-      "priority": "medium",
-      "details": "- Set up version scripts\n- Configure changelog generation\n- Set up release process",
-      "testStrategy": "- Test version bump scripts\n- Verify changelog generation and updates\n- Test semantic versioning compliance\n- Verify git tag creation\n- Test release process end-to-end\n- Verify version is correctly reflected in built assets"
+      "dependencies": [
+        13
+      ],
+      "priority": "high",
+      "subtasks": []
     },
     {
       "id": 15,
-      "title": "Documentation",
-      "description": "Create project documentation",
+      "title": "Implement Single Toggle Record/Stop Button",
+      "description": "Update the UI to use a single button that toggles between record and stop states",
+      "details": "- Update popup.html to remove the stop button\n- Modify popup.ts to handle toggle functionality\n- Update button styles for different states\n- Ensure proper state management",
+      "testStrategy": "Test recording start/stop functionality\nVerify button state changes\nCheck for any UI glitches",
       "status": "pending",
-      "dependencies": [1],
+      "dependencies": [
+        13
+      ],
+      "priority": "high",
+      "subtasks": []
+    },
+    {
+      "id": 16,
+      "title": "Add Recording Timer",
+      "description": "Display elapsed time during recording",
+      "details": "- Add timer display to the UI\n- Implement timer logic in TypeScript\n- Update timer display in real-time\n- Format time display (HH:MM:SS)",
+      "testStrategy": "Verify timer starts with recording\nCheck timer accuracy\nTest timer stops correctly\nVerify display formatting",
+      "status": "pending",
+      "dependencies": [
+        15
+      ],
+      "priority": "high",
+      "subtasks": []
+    },
+    {
+      "id": 17,
+      "title": "Enhance Meeting Detection",
+      "description": "Improve meeting platform detection and information display",
+      "details": "- Detect meeting platforms (Zoom, Google Meet, etc.)\n- Extract and display meeting title\n- Show participant count\n- Display meeting platform icon",
+      "testStrategy": "Test detection on different platforms\nVerify information accuracy\nCheck UI updates on meeting detection",
+      "status": "pending",
+      "dependencies": [
+        16
+      ],
       "priority": "medium",
-      "details": "- Create README.md\n- Document project structure\n- Add setup instructions\n- Document development workflow",
-      "testStrategy": "- Verify README contains all necessary sections\n- Test all code examples in documentation\n- Check for broken links in documentation\n- Verify API documentation is complete and accurate\n- Test setup instructions by following them in a clean environment\n- Verify documentation reflects current project state"
+      "subtasks": []
+    },
+    {
+      "id": 18,
+      "title": "Implement Basic Transcription",
+      "description": "Add real-time transcription functionality",
+      "details": "- Integrate with speech-to-text API\n- Display live transcription\n- Save transcript with timestamps\n- Add UI for transcript display",
+      "testStrategy": "Test transcription accuracy\nCheck real-time updates\nVerify transcript saving\nTest with different audio qualities",
+      "status": "pending",
+      "dependencies": [
+        17
+      ],
+      "priority": "high",
+      "subtasks": []
+    },
+    {
+      "id": 19,
+      "title": "Add AI Summarization",
+      "description": "Implement AI-powered meeting summarization",
+      "details": "- Generate meeting summaries using AI\n- Extract key points and action items\n- Display summary in a collapsible section\n- Allow copying/saving summaries",
+      "testStrategy": "Test summary quality\nCheck performance with different meeting lengths\nVerify action item extraction\nTest UI for summary display",
+      "status": "pending",
+      "dependencies": [
+        18
+      ],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 20,
+      "title": "Add Export Functionality",
+      "description": "Implement options to export recordings and transcripts",
+      "details": "- Add export options (TXT, PDF, DOCX)\n- Implement export UI\n- Include metadata in exports\n- Add share functionality",
+      "testStrategy": "Test all export formats\nVerify exported content\nCheck file naming and metadata\nTest share functionality",
+      "status": "pending",
+      "dependencies": [
+        19
+      ],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 21,
+      "title": "Add Calendar Integration",
+      "description": "Integrate with Google Calendar and Outlook",
+      "details": "- Connect to Google Calendar API\n- Connect to Outlook Calendar API\n- Show upcoming meetings\n- Auto-detect meeting details",
+      "testStrategy": "Test OAuth flow\nVerify meeting detection\nCheck calendar event creation\nTest with multiple calendar providers",
+      "status": "pending",
+      "dependencies": [
+        20
+      ],
+      "priority": "medium",
+      "subtasks": []
+    },
+    {
+      "id": 22,
+      "title": "Add Settings & Preferences",
+      "description": "Create a settings page for user preferences",
+      "details": "- Create settings page\n- Add theme preferences\n- Configure recording quality\n- Set default export format\n- Manage integrations",
+      "testStrategy": "Test all settings options\nVerify preference persistence\nCheck theme switching\nTest integration toggles",
+      "status": "pending",
+      "dependencies": [
+        21
+      ],
+      "priority": "low",
+      "subtasks": []
     }
   ]
 }

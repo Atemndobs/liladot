@@ -1,0 +1,17 @@
+# Task ID: 16
+# Title: Add Recording Timer
+# Status: pending
+# Dependencies: 15
+# Priority: high
+# Description: Display elapsed time during recording
+# Details:
+- Add timer display to the UI
+- Implement timer logic in TypeScript
+- Update timer display in real-time
+- Format time display (HH:MM:SS)
+
+# Test Strategy:
+Verify timer starts with recording
+Check timer accuracy
+Test timer stops correctly
+Verify display formatting

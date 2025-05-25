@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     background: './src/background.ts',
     popup: './src/popup/popup.ts',
-    content: './src/content/meetingDetector.ts'
+    'content/meetingDetector': './src/content/meetingDetector.ts'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -31,16 +31,26 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/popup/index.html',
-      filename: 'popup.html',
-      chunks: ['popup'],
-    }),
+    // Remove HtmlWebpackPlugin since we're copying the HTML file directly
     new CopyPlugin({
       patterns: [
-        { from: 'public', to: '.', noErrorOnMissing: true },
-        { from: 'src/manifest.json', to: '.' },
-        { from: 'src/assets', to: 'assets', noErrorOnMissing: true },
+        { 
+          from: 'public/assets', 
+          to: 'assets', 
+          noErrorOnMissing: true 
+        },
+        { 
+          from: 'manifest.json', 
+          to: 'manifest.json' 
+        },
+        {
+          from: 'src/popup/popup.css',
+          to: 'popup.css'
+        },
+        {
+          from: 'src/popup/popup.html',
+          to: 'popup.html'
+        }
       ],
     }),
   ],

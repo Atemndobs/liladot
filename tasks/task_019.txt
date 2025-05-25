@@ -1,0 +1,17 @@
+# Task ID: 19
+# Title: Add AI Summarization
+# Status: pending
+# Dependencies: 18
+# Priority: medium
+# Description: Implement AI-powered meeting summarization
+# Details:
+- Generate meeting summaries using AI
+- Extract key points and action items
+- Display summary in a collapsible section
+- Allow copying/saving summaries
+
+# Test Strategy:
+Test summary quality
+Check performance with different meeting lengths
+Verify action item extraction
+Test UI for summary display

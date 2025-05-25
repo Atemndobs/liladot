@@ -1,0 +1,17 @@
+# Task ID: 21
+# Title: Add Calendar Integration
+# Status: pending
+# Dependencies: 20
+# Priority: medium
+# Description: Integrate with Google Calendar and Outlook
+# Details:
+- Connect to Google Calendar API
+- Connect to Outlook Calendar API
+- Show upcoming meetings
+- Auto-detect meeting details
+
+# Test Strategy:
+Test OAuth flow
+Verify meeting detection
+Check calendar event creation
+Test with multiple calendar providers

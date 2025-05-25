@@ -1,0 +1,17 @@
+# Task ID: 18
+# Title: Implement Basic Transcription
+# Status: pending
+# Dependencies: 17
+# Priority: high
+# Description: Add real-time transcription functionality
+# Details:
+- Integrate with speech-to-text API
+- Display live transcription
+- Save transcript with timestamps
+- Add UI for transcript display
+
+# Test Strategy:
+Test transcription accuracy
+Check real-time updates
+Verify transcript saving
+Test with different audio qualities

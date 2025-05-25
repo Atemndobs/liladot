@@ -1,0 +1,23 @@
+# Task ID: 10
+# Title: Add Export Options for Transcripts
+# Status: pending
+# Dependencies: 8
+# Priority: medium
+# Description: Implement functionality to export transcripts in multiple formats
+# Details:
+- Add export menu to transcript view
+- Support formats: TXT, PDF, DOCX, SRT
+- Implement formatting options
+- Add timestamp inclusion toggle
+- Add speaker labels option
+- Implement batch export
+- Add progress indicators
+- Add success/error notifications
+
+# Test Strategy:
+- Test export in all formats
+- Verify formatting is correct
+- Test with different transcript lengths
+- Verify timestamps and speaker labels
+- Test batch export functionality
+- Verify error handling

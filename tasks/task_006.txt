@@ -1,0 +1,21 @@
+# Task ID: 6
+# Title: Integrate Dashboard with Extension
+# Status: pending
+# Dependencies: 5
+# Priority: high
+# Description: Connect the extension popup with the dashboard web app
+# Details:
+- Add dashboard button to extension popup
+- Implement secure communication between extension and dashboard
+- Handle authentication state between extension and dashboard
+- Add deep linking to specific recordings/transcripts
+- Implement message passing for real-time updates
+- Add error handling for connection issues
+- Ensure secure data transfer
+
+# Test Strategy:
+- Test opening dashboard from extension
+- Verify authentication state is maintained
+- Test deep linking to specific content
+- Verify real-time updates work
+- Test error scenarios and recovery

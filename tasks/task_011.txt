@@ -1,0 +1,24 @@
+# Task ID: 11
+# Title: Integrate Calendar Services
+# Status: pending
+# Dependencies: 8
+# Priority: medium
+# Description: Add support for syncing with popular calendar services
+# Details:
+- Add calendar service selection (Google, Outlook, etc.)
+- Implement OAuth2 authentication flow
+- Create event sync functionality
+- Add meeting detection from calendar
+- Implement automatic recording scheduling
+- Add calendar view in dashboard
+- Handle recurring events
+- Add notification settings
+
+# Test Strategy:
+- Test OAuth flow for each service
+- Verify event syncing works correctly
+- Test meeting detection from calendar
+- Verify recording scheduling
+- Test notification system
+- Verify handling of time zones
+- Test with recurring events

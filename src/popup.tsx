@@ -1,14 +1,15 @@
-import { useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import '../styles/globals.css'
+import '../styles/globals.css';
+
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
 
 function IndexPopup() {
-  const [isRecording, setIsRecording] = useState(false)
+  const [isRecording, setIsRecording] = useState(false);
 
   const toggleRecording = () => {
-    setIsRecording(!isRecording)
+    setIsRecording(!isRecording);
     // TODO: Implement recording logic
-  }
+  };
 
   return (
     <div className="w-64 p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
@@ -29,9 +30,9 @@ function IndexPopup() {
         </button>
       </div>
     </div>
-  )
+  );
 }
 
-const root = document.createElement('div')
-document.body.appendChild(root)
-createRoot(root).render(<IndexPopup />)
+const root = document.createElement('div');
+document.body.appendChild(root);
+createRoot(root).render(<IndexPopup />);

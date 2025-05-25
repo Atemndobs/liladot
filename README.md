@@ -1,23 +1,52 @@
-# LilaDot - Meeting Notes & Transcription Chrome Extension
+# LilaDot - Meeting Notes & Transcription Platform
 
-LilaDot is a Chrome extension that helps you capture and transcribe meeting notes from various video conferencing platforms including Google Meet, Zoom, and Microsoft Teams.
+LilaDot is a comprehensive solution for capturing, transcribing, and managing meeting notes across various video conferencing platforms.
+
+## Monorepo Structure
+
+```text
+liladot/
+├── web/                # Web application (React, Vite, Tailwind CSS)
+├── packages/           # Shared packages (TBD)
+└── src/                # Chrome extension source (Plasmo)
+```
 
 ## Features
 
-- 🎙️ Record meeting audio
+### Chrome Extension
+
+- 🎙️ Record meeting audio from Google Meet, Zoom, and Microsoft Teams
 - 📝 Automatic transcription
-- 📂 Save and organize notes
 - 🔍 Search through past meetings
 - 🎨 Clean, user-friendly interface
-- 🔒 Privacy-focused (all processing happens locally)
+
+### Web Application
+
+- 📂 Organize and manage meeting notes
+- 🔒 Secure user authentication
+- 🚀 Modern, responsive interface
+- 🔄 Sync with Chrome extension
 
 ## Tech Stack
 
-- **Framework**: [Plasmo](https://docs.plasmo.com/) (Chrome Extension Framework)
-- **Frontend**: React 18, TypeScript, Tailwind CSS
-- **State Management**: Zustand
-- **Build Tool**: Vite
+### Shared
+
+- **Language**: TypeScript
+- **UI**: React 18, Tailwind CSS
 - **Linting**: ESLint + Prettier
+
+### Chrome Extension
+
+- **Framework**: [Plasmo](https://docs.plasmo.com/)
+- **Build**: Vite
+- **State Management**: Zustand
+
+### Web Application
+
+- **Framework**: React 18
+- **Build**: Vite
+- **Styling**: Tailwind CSS
+- **Auth**: Supabase
 
 ## Getting Started
 
@@ -30,27 +59,90 @@ LilaDot is a Chrome extension that helps you capture and transcribe meeting note
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/liladot.git
    cd liladot
    ```
 
-2. Install dependencies:
+2. Install root dependencies:
+
    ```bash
    npm install
    # or
    yarn
    ```
 
-3. Start the development server:
+3. Install web app dependencies:
+
    ```bash
-   npm run dev
+   cd web
+   npm install
    # or
-   yarn dev
+   yarn
+   cd ..
    ```
 
-4. Load the extension in Chrome:
-   - Open Chrome and navigate to `chrome://extensions/`
+## Development
+
+### Chrome Extension
+
+```bash
+# Start development server
+npm run extension:dev
+
+# Build for production
+npm run extension:build
+```
+
+### Web Application
+
+```bash
+# Start development server
+npm run web:dev
+
+# Build for production
+npm run web:build
+
+# Preview production build
+npm run web:preview
+```
+
+## Environment Variables
+
+Create the following files and add the appropriate environment variables:
+
+### Root `.env`
+
+```bash
+# Add any shared environment variables here
+```
+
+### Web App (web/.env.development)
+
+```bash
+VITE_API_BASE_URL=http://localhost:3000
+VITE_APP_URL=http://localhost:3000
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## Contributing
+
+1. Create a new branch
+2. Make your changes
+3. Run tests
+4. Submit a pull request
+
+## License
+
+MIT
+
+## Loading the Extension in Chrome
+
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable "Developer mode" in the top right
+3. Click "Load unpacked" and select the `dist` directory
    - Enable "Developer mode" (toggle in the top-right corner)
    - Click "Load unpacked" and select the `build/chrome-mv3-dev` directory
 

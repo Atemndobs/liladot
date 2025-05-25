@@ -1,5 +1,10 @@
 // Background service worker for LilaDot
-import { isMeetingUrl, detectMeetingPlatform, extractMeetingId } from './utils/meetingUtils';
+import { isMeetingUrl } from './utils/meetingUtils';
+import { MessageType } from './utils/messaging';
+
+// Keep track of recording state
+let isRecording = false;
+let recordingStartTime: number | null = null;
 
 // Types
 interface Settings {
@@ -22,33 +27,50 @@ chrome.runtime.onInstalled.addListener((details) => {
     const defaultSettings: Settings = {
       autoStart: false,
       audioQuality: 'high',
-      saveTranscripts: true
+      saveTranscripts: true,
     };
     chrome.storage.local.set({ settings: defaultSettings });
   }
 });
 
 // Handle messages from popup and content scripts
-chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
-  const { action, tabId } = request;
-  
-  const respond = (response: MessageResponse) => {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  const { type, data } = request;
+  const tabId = sender.tab?.id;
+
+  const respond = (response: any) => {
     if (chrome.runtime.lastError) {
       console.error('Runtime error:', chrome.runtime.lastError);
-      sendResponse({ success: false, error: chrome.runtime.lastError.message });
+      sendResponse({ 
+        success: false, 
+        error: chrome.runtime.lastError.message 
+      });
     } else {
-      sendResponse(response);
+      sendResponse({ success: true, ...response });
     }
   };
 
-  switch (action) {
-    case 'START_RECORDING':
+  switch (type) {
+    case MessageType.START_RECORDING:
+      if (tabId === undefined) {
+        respond({ error: 'No active tab found' });
+        return true;
+      }
       handleStartRecording(tabId, respond);
       return true; // Required for async sendResponse
-    case 'STOP_RECORDING':
+    case MessageType.STOP_RECORDING:
+      if (tabId === undefined) {
+        respond({ error: 'No active tab found' });
+        return true;
+      }
       handleStopRecording(tabId, respond);
       return true;
-    case 'GET_STATUS':
+    case MessageType.GET_RECORDING_STATE:
+      respond({
+        isRecording,
+        startTime: recordingStartTime
+      });
+      return true;
       handleGetStatus(respond);
       return true;
     default:
@@ -57,7 +79,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 });
 
 async function handleStartRecording(
-  tabId: number, 
+  tabId: number,
   sendResponse: (response: MessageResponse) => void
 ): Promise<void> {
   try {
@@ -75,35 +97,35 @@ async function handleStartRecording(
     // Send stream ID to content script
     await chrome.tabs.sendMessage(tabId, {
       action: 'START_RECORDING',
-      streamId
+      streamId,
     });
 
     sendResponse({ success: true });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     console.error('Error starting recording:', errorMessage);
-    sendResponse({ 
-      success: false, 
-      error: errorMessage 
+    sendResponse({
+      success: false,
+      error: errorMessage,
     });
   }
 }
 
 async function handleStopRecording(
-  tabId: number, 
+  tabId: number,
   sendResponse: (response: MessageResponse) => void
 ): Promise<void> {
   try {
     await chrome.tabs.sendMessage(tabId, {
-      action: 'STOP_RECORDING'
+      action: 'STOP_RECORDING',
     });
     sendResponse({ success: true });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     console.error('Error stopping recording:', errorMessage);
-    sendResponse({ 
-      success: false, 
-      error: errorMessage 
+    sendResponse({
+      success: false,
+      error: errorMessage,
     });
   }
 }
@@ -118,9 +140,9 @@ async function handleGetStatus(
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Failed to get settings';
     console.error('Error getting status:', errorMessage);
-    sendResponse({ 
-      success: false, 
-      error: errorMessage 
+    sendResponse({
+      success: false,
+      error: errorMessage,
     });
   }
 }
@@ -131,12 +153,14 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     // Check if the URL matches a supported meeting platform
     if (isMeetingUrl(tab.url)) {
       // Inject content script
-      chrome.scripting.executeScript({
-        target: { tabId },
-        files: ['content/meetingDetector.js']
-      }).catch((error) => {
-        console.error('Failed to inject content script:', error);
-      });
+      chrome.scripting
+        .executeScript({
+          target: { tabId },
+          files: ['content/meetingDetector.js'],
+        })
+        .catch((error) => {
+          console.error('Failed to inject content script:', error);
+        });
     }
   }
 });

@@ -1,18 +1,21 @@
 # Task ID: 1
-# Title: Initialize Git repository
-# Status: in-progress
+# Title: Implement Supabase storage for recordings and transcripts
+# Status: pending
 # Dependencies: None
 # Priority: high
-# Description: Set up Git repository with proper .gitignore, README, and license
+# Description: Set up Supabase integration to store meeting recordings and transcripts
 # Details:
-- Initialize Git repository
-- Add .gitignore file
-- Create README.md with project overview
-- Add MIT license
+- Set up Supabase project and database
+- Create tables for recordings and transcripts
+- Implement file upload functionality for recordings
+- Store transcript data with proper relationships
+- Add error handling and retry logic
+- Implement progress tracking for uploads
+- Add storage cleanup for old recordings
 
 # Test Strategy:
-- Run `git status` to verify clean working directory
-- Verify .gitignore file exists and contains essential patterns
-- Check README.md exists and contains project overview
-- Confirm MIT LICENSE file exists with correct content
-- Verify initial commit is created with all starter files
+- Test file uploads of different sizes
+- Verify transcript data is stored correctly
+- Test retrieval of recordings and transcripts
+- Verify error handling for failed uploads
+- Test storage cleanup functionality

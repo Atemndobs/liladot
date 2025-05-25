@@ -1,0 +1,21 @@
+# Task ID: 13
+# Title: Update Theme System
+# Status: pending
+# Dependencies: None
+# Priority: high
+# Description: Implement light and dark themes with correct color scheme
+# Details:
+- Create light theme with light gray background
+- Create dark theme with glassy black background
+- Update purple accent color for buttons and logo
+- Add theme toggle functionality
+- Save theme preference
+- Update all UI components to use theme variables
+- Ensure proper contrast and accessibility
+
+# Test Strategy:
+- Test theme switching
+- Verify color contrast meets accessibility standards
+- Test theme persistence
+- Check all UI elements in both themes
+- Test on different devices and screen sizes

@@ -1,0 +1,18 @@
+# Task ID: 22
+# Title: Add Settings & Preferences
+# Status: pending
+# Dependencies: 21
+# Priority: low
+# Description: Create a settings page for user preferences
+# Details:
+- Create settings page
+- Add theme preferences
+- Configure recording quality
+- Set default export format
+- Manage integrations
+
+# Test Strategy:
+Test all settings options
+Verify preference persistence
+Check theme switching
+Test integration toggles

@@ -1,0 +1,17 @@
+# Task ID: 14
+# Title: Convert Record/Stop to Single Toggle Button
+# Status: pending
+# Dependencies: 13
+# Priority: high
+# Description: Update the UI to use a single button that toggles between record and stop states
+# Details:
+- Update the popup HTML to have a single record/stop button
+- Modify the TypeScript to handle the toggle functionality
+- Update the button styling to change appearance based on state
+- Ensure proper state management between record and stop modes
+
+# Test Strategy:
+- Test toggling between record and stop states
+- Verify button appearance changes correctly
+- Ensure recording starts and stops as expected
+- Check for any state management issues

@@ -1,0 +1,17 @@
+# Task ID: 20
+# Title: Add Export Functionality
+# Status: pending
+# Dependencies: 19
+# Priority: medium
+# Description: Implement options to export recordings and transcripts
+# Details:
+- Add export options (TXT, PDF, DOCX)
+- Implement export UI
+- Include metadata in exports
+- Add share functionality
+
+# Test Strategy:
+Test all export formats
+Verify exported content
+Check file naming and metadata
+Test share functionality

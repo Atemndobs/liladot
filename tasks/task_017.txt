@@ -1,0 +1,16 @@
+# Task ID: 17
+# Title: Enhance Meeting Detection
+# Status: pending
+# Dependencies: 16
+# Priority: medium
+# Description: Improve meeting platform detection and information display
+# Details:
+- Detect meeting platforms (Zoom, Google Meet, etc.)
+- Extract and display meeting title
+- Show participant count
+- Display meeting platform icon
+
+# Test Strategy:
+Test detection on different platforms
+Verify information accuracy
+Check UI updates on meeting detection

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LilaDot Recorder</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+    <span class="sun-icon">☀️</span>
+    <span class="moon-icon">🌙</span>
+  </button>
+  
+  <div class="container">
+    <div class="header">
+      <h1>LilaDot</h1>
+      <div class="status">
+        <span class="status-dot"></span>
+        <span id="status-text">Ready</span>
+      </div>
+    </div>
+
+    <div id="meeting-info" class="meeting-info">
+      <div class="info-row">
+        <span class="label"><i class="fas fa-video"></i> Platform</span>
+        <span id="meeting-platform" class="value">-</span>
+      </div>
+      <div class="info-row">
+        <span class="label"><i class="fas fa-clock"></i> Duration</span>
+        <span id="meeting-duration" class="value">00:00:00</span>
+      </div>
+      <div class="info-row">
+        <span class="label"><i class="fas fa-users"></i> Participants</span>
+        <span id="participant-count" class="value">-</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="record-toggle-btn" class="btn btn-primary">
+        <i class="fas fa-circle icon"></i>
+        <span id="record-btn-text">Start Recording</span>
+      </button>
+      <button id="dashboard-btn" class="btn btn-secondary">
+        <i class="fas fa-tachometer-alt icon"></i>
+        <span>Dashboard</span>
+      </button>
+      <button id="settings-btn" class="btn btn-secondary">
+        <i class="fas fa-cog icon"></i>
+        <span>Settings</span>
+      </button>
+    </div>
+
+    <div class="footer">
+      <small>LilaDot v1.0.0</small>
+    </div>
+  </div>
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

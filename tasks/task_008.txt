@@ -1,11 +1,24 @@
 # Task ID: 8
-# Title: Set up testing framework
+# Title: Develop Dashboard Web Application
 # Status: pending
-# Dependencies: 2, 3, 4
-# Priority: medium
-# Description: Configure Jest and Testing Library
+# Dependencies: 5
+# Priority: high
+# Description: Create a web-based dashboard for managing recordings and settings
 # Details:
-
+- Set up a new React application for the dashboard
+- Implement authentication with Supabase
+- Create a responsive layout with sidebar navigation
+- Build the recordings list view with search and filtering
+- Implement the recording detail view with player and transcript
+- Create settings page for user preferences
+- Add AI summarization features
+- Implement dark/light theme support
 
 # Test Strategy:
-
+- Test responsive design on different screen sizes
+- Verify authentication flow works correctly
+- Test all CRUD operations for recordings
+- Verify search and filtering functionality
+- Test AI summarization features
+- Verify theme switching works
+- Test error handling and loading states

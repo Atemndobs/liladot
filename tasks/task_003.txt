@@ -1,18 +1,21 @@
 # Task ID: 3
-# Title: Configure TypeScript
+# Title: Update background script for Supabase storage
 # Status: pending
 # Dependencies: 2
 # Priority: high
-# Description: Set up TypeScript configuration for the project
+# Description: Modify the background script to handle Supabase storage operations
 # Details:
-- Install TypeScript as dev dependency
-- Create tsconfig.json
-- Configure compiler options
-- Set up type definitions
+- Update message handlers for storage operations
+- Implement file chunking for large recordings
+- Add progress tracking for uploads/downloads
+- Handle offline scenarios with queueing
+- Implement retry logic for failed operations
+- Add storage quota management
+- Update state management for cloud storage
 
 # Test Strategy:
-- Verify tsconfig.json exists with correct configuration
-- Create a test TypeScript file with type definitions
-- Run `tsc --noEmit` to check for compilation errors
-- Verify type checking works with `tsc --pretty --noEmit`
-- Test with strict mode enabled
+- Test uploading recordings of various sizes
+- Verify progress tracking works correctly
+- Test offline behavior and sync
+- Verify retry logic for failed uploads
+- Test storage quota enforcement

@@ -10,7 +10,7 @@ export function isMeetingUrl(url: string): boolean {
     /^https?:\/\/teams\.microsoft\.com\/l\/meeting/,
     /^https?:\/\/teams\.microsoft\.com\/meeting/,
   ];
-  return meetingPatterns.some(pattern => pattern.test(url));
+  return meetingPatterns.some((pattern) => pattern.test(url));
 }
 
 /**
@@ -33,23 +33,23 @@ export function detectMeetingPlatform(url: string): string {
 export function extractMeetingId(url: string): string | null {
   try {
     const urlObj = new URL(url);
-    
+
     // Google Meet
     if (urlObj.hostname === 'meet.google.com') {
       return urlObj.pathname.split('/').pop() || null;
     }
-    
+
     // Zoom
     if (urlObj.hostname === 'zoom.us' && urlObj.pathname.startsWith('/j/')) {
       return urlObj.pathname.split('/j/').pop() || null;
     }
-    
+
     // Microsoft Teams
     if (urlObj.hostname.includes('teams.microsoft.com')) {
       const meetingIdMatch = url.match(/meetup-join\/([^/]+)/);
       return meetingIdMatch ? meetingIdMatch[1] : null;
     }
-    
+
     return null;
   } catch (error) {
     console.error('Error extracting meeting ID:', error);

@@ -1,11 +1,16 @@
 # Task ID: 15
-# Title: Documentation
+# Title: Implement Single Toggle Record/Stop Button
 # Status: pending
-# Dependencies: None
-# Priority: low
-# Description: Create project documentation
+# Dependencies: 13
+# Priority: high
+# Description: Update the UI to use a single button that toggles between record and stop states
 # Details:
-
+- Update popup.html to remove the stop button
+- Modify popup.ts to handle toggle functionality
+- Update button styles for different states
+- Ensure proper state management
 
 # Test Strategy:
-
+Test recording start/stop functionality
+Verify button state changes
+Check for any UI glitches

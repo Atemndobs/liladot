@@ -9,8 +9,11 @@
     "scripting",
     "tabs"
   ],
+  "optional_permissions": [
+    "alarms"
+  ],
   "host_permissions": [
-    "<all_urls>"
+    "https://app.liladot.com/*"
   ],
   "background": {
     "service_worker": "background.js",

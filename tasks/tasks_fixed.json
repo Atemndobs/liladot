@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Initialize Git repository",
       "description": "Set up Git repository with proper .gitignore, README, and license",
-      "status": "in-progress",
+      "status": "done",
       "dependencies": [],
       "priority": "high",
       "details": "- Initialize Git repository\n- Add .gitignore file\n- Create README.md with project overview\n- Add MIT license",
@@ -14,7 +14,7 @@
       "id": 2,
       "title": "Set up package.json",
       "description": "Initialize package.json with project metadata and scripts",
-      "status": "pending",
+      "status": "done",
       "dependencies": [
         1
       ],
@@ -26,7 +26,7 @@
       "id": 3,
       "title": "Configure TypeScript",
       "description": "Set up TypeScript configuration for the project",
-      "status": "pending",
+      "status": "done",
       "dependencies": [
         2
       ],
@@ -38,7 +38,7 @@
       "id": 4,
       "title": "Set up ESLint and Prettier",
       "description": "Configure code linting and formatting",
-      "status": "pending",
+      "status": "in-progress",
       "dependencies": [
         2
       ],
@@ -76,6 +76,22 @@
       "status": "pending",
       "dependencies": [],
       "priority": "low"
+    },
+    {
+      "id": 16,
+      "title": "Implement Popup UI and Functionality",
+      "description": "Create and implement the popup interface with all necessary functionality including meeting detection status, recording controls, and state management.",
+      "details": "",
+      "testStrategy": "",
+      "status": "pending",
+      "dependencies": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "priority": "high",
+      "subtasks": []
     }
   ]
 }
